@@ -1,9 +1,9 @@
 #!/usr/bin/node
 const request = require('request');
-const api_URL = 'https://swapi-api.hbtn.io/api';
+const apiURL = 'https://swapi-api.hbtn.io/api';
 
 if (process.argv.length > 2) {
-  request(`${api_URL}/films/${process.argv[2]}/`, (err, _, body) => {
+  request(`${apiURL}/films/${process.argv[2]}/`, (err, _, body) => {
     if (err) {
       console.log(err);
     }
