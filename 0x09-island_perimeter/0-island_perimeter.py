@@ -3,23 +3,23 @@
 """
 
 
-def island_perimeter(grid: list[list[int]]) -> int:
+def island_perimeter(grid):
     """Computes the perimeter of an island with no lakes.
     """
-    N = len(grid)
-    M = len(grid[0])
-    def dfs(r, c):
-        if r < 0 or r >= N or c >= M or grid[r][c] == 0:
-            return 1
-        if grid[r][c] == 1:
-            grid[r][c] = 2
-            return dfs(r - 1, c) + dfs(r + 1, c) + dfs(r, c - 1) + dfs(r, c + 1)
-        return 0
-
     perimeter = 0
-    for r in range(N):
-        for c in range(M):
-            if grid[r][c] == 1:
-                perimeter += dfs(r, c)
-
+    if type(grid) != list:
+        return 0
+    n = len(grid)
+    for i, row in enumerate(grid):
+        m = len(row)
+        for j, cell in enumerate(row):
+            if cell == 0:
+                continue
+            possibles = (
+                i == 0 or (len(grid[i - 1]) > j and grid[i - 1][j] == 0),
+                j == m - 1 or (m > j + 1 and row[j + 1] == 0),
+                i == n - 1 or (len(grid[i + 1]) > j and grid[i + 1][j] == 0),
+                j == 0 or row[j - 1] == 0,
+            )
+            perimeter += sum(possibles)
     return perimeter
